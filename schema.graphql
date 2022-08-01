@@ -1,9 +1,54 @@
+# Methods called by the owner
+type UpdateSettings @entity {
+  id: ID! # The block hash
+  blockHeight: BigInt!
+  user: String!
+}
+
+type MoveBalances @entity {
+  id: ID! # The block hash
+  blockHeight: BigInt!
+  user: String!
+}
+
+# Agent methods
+type RegisterAgent @entity {
+  id: ID! # The block hash
+  blockHeight: BigInt!
+  user: String! # The address that tries to register as an agent
+}
+
+type UpdateAgent @entity {
+  id: ID! # The block hash
+  blockHeight: BigInt!
+  user: String!
+}
+
+type UnregisterAgent @entity {
+  id: ID! # The block hash
+  blockHeight: BigInt!
+  user: String!
+}
+
+type WithdrawReward @entity {
+  id: ID! # The block hash
+  blockHeight: BigInt!
+  user: String!
+}
+
+type CheckInAgent @entity {
+  id: ID! # The block hash
+  blockHeight: BigInt!
+  user: String!
+}
+
 type ProxyCall @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  agent: String! # The address of the agent
+  user: String! # The address of the agent
 }
 
+# Methods for tasks
 type CreateTask @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
@@ -11,8 +56,15 @@ type CreateTask @entity {
   # TODO: more fields
 }
 
-type RegisterAgent @entity {
+type RemoveTask @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  user: String! # The address that tries to register as an agent
+  user: String! # The address of the agent
 }
+
+type RefillTaskBalance @entity {
+  id: ID! # The block hash
+  blockHeight: BigInt!
+  user: String! # The address of the agent
+}
+

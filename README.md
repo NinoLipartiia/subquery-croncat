@@ -24,6 +24,13 @@ yarn build
 yarn start:docker
 ```
 
+```shell
+yarn
+yarn codegen
+yarn build
+yarn start:docker
+```
+
 ### 4. Query
 
 Query `proxy_call`:

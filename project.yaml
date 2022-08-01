@@ -32,27 +32,70 @@ dataSources:
     mapping:
       file: "./dist/index.js"
       handlers:
+        - handler: handleUpdateSettings # Methods called by the owner
+          kind: cosmos/MessageHandler
+          filter:
+            type: "/cosmwasm.wasm.v1.MsgExecuteContract"
+            contractCall: "update_settings"
+            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+        - handler: handleMoveBalances
+          kind: cosmos/MessageHandler
+          filter:
+            type: "/cosmwasm.wasm.v1.MsgExecuteContract"
+            contractCall: "move_balances"
+            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+        - handler: handleCreateTask # Methods for tasks 
+          kind: cosmos/MessageHandler
+          filter:
+            type: "/cosmwasm.wasm.v1.MsgExecuteContract"
+            contractCall: "create_task"
+            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+        - handler: handleRemoveTask
+          kind: cosmos/MessageHandler
+          filter:
+            type: "/cosmwasm.wasm.v1.MsgExecuteContract"
+            contractCall: "remove_task"
+            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+        - handler: handleRefillTaskBalance
+          kind: cosmos/MessageHandler
+          filter:
+            type: "/cosmwasm.wasm.v1.MsgExecuteContract"
+            contractCall: "refill_task"
+            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+        - handler: handleRegisterAgent # Agent methods
+          kind: cosmos/MessageHandler
+          filter:
+            type: "/cosmwasm.wasm.v1.MsgExecuteContract"
+            contractCall: "register_agent"
+            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+        - handler: handleUpdateAgent
+          kind: cosmos/MessageHandler
+          filter:
+            type: "/cosmwasm.wasm.v1.MsgExecuteContract"
+            contractCall: "update_agent"
+            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+        - handler: handleUnregisterAgent
+          kind: cosmos/MessageHandler
+          filter:
+            type: "/cosmwasm.wasm.v1.MsgExecuteContract"
+            contractCall: "unregister_agent"
+            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+        - handler: handleWithdrawReward
+          kind: cosmos/MessageHandler
+          filter:
+            type: "/cosmwasm.wasm.v1.MsgExecuteContract"
+            contractCall: "withdraw_agent_balance"
+            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+        - handler: handleCheckInAgent
+          kind: cosmos/MessageHandler
+          filter:
+            type: "/cosmwasm.wasm.v1.MsgExecuteContract"
+            contractCall: "accept_nomination_agent"
+            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
         - handler: handleProxyCall
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
-            # Filter to only messages with the provide_liquidity function call
-            contractCall: "proxy_call" # The name of the contract function that was called
-            #values: # A set of key/value pairs that are present in the message data
-            contract: "juno1cccd0ms3cuecwd4chzu0rk4k7n2npupxvd96xf2gsw6ugkkmnyjsjw02gr"
-        - handler: handleCreateTask
-          kind: cosmos/MessageHandler
-          filter:
-            type: "/cosmwasm.wasm.v1.MsgExecuteContract"
-            # Filter to only messages with the provide_liquidity function call
-            contractCall: "create_task" # The name of the contract function that was called
-            #values: # A set of key/value pairs that are present in the message data
-            contract: "juno1cccd0ms3cuecwd4chzu0rk4k7n2npupxvd96xf2gsw6ugkkmnyjsjw02gr"
-        - handler: handleRegisterAgent
-          kind: cosmos/MessageHandler
-          filter:
-            type: "/cosmwasm.wasm.v1.MsgExecuteContract"
-            # Filter to only messages with the provide_liquidity function call
-            contractCall: "register_agent" # The name of the contract function that was called
-            #values: # A set of key/value pairs that are present in the message data
-            contract: "juno1cccd0ms3cuecwd4chzu0rk4k7n2npupxvd96xf2gsw6ugkkmnyjsjw02gr"
+            contractCall: "proxy_call"
+            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+
