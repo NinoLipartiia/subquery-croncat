@@ -1,25 +1,18 @@
-type Block @entity {
+type ProxyCall @entity {
   id: ID! # The block hash
-  height: BigInt!
+  blockHeight: BigInt!
+  agent: String! # The address of the agent
 }
 
-type ExecuteEvent @entity {
-  id: ID!
+type CreateTask @entity {
+  id: ID! # The block hash
   blockHeight: BigInt!
-  txHash: String!
-  contractAddress: String!
+  user: String! # The address that voted
+  # TODO: more fields
 }
 
-type Transaction @entity {
-  id: ID!
+type RegisterAgent @entity {
+  id: ID! # The block hash
   blockHeight: BigInt!
-  timestamp: String!
-}
-
-type Message @entity {
-  id: ID!
-  blockHeight: BigInt!
-  txHash: String!
-  sender: String!
-  contract: String!
+  user: String! # The address that tries to register as an agent
 }

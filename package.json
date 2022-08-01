@@ -10,7 +10,7 @@
     "codegen": "subql codegen",
     "start:docker": "docker-compose pull && docker-compose up --remove-orphans"
   },
-  "homepage": "https://github.com/subquery/cosmos-subql-starter",
+  "homepage": "https://github.com/NinoLipartiia/subql-croncat",
   "repository": "github:subquery/cosmos-subql-starter",
   "files": [
     "dist",

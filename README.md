@@ -1,16 +1,3 @@
-# SubQuery Starter Project for Cosmos Networks
-
-This is a starter project for Indexing Cosmos Networks. It includes a simple blockhandler and an event handler.
-
-**You can find starter projects for different Cosmos zones within this repository under each branch, this includes**:
-
-- Juno (main)
-- CosmosHub
-- Fetch.ai
-- Stargaze
-- Osmosis
-- Cronos
-
 # Getting Started
 
 ### 1. Install dependencies
@@ -36,3 +23,78 @@ yarn build
 ```shell
 yarn start:docker
 ```
+
+### 4. Query
+
+Query `proxy_call`:
+```shell
+query {
+  proxyCalls(
+    	last: 3
+    	orderBy: ID_DESC
+  ) {
+    nodes {
+      nodeId
+     	id
+  	}
+  }
+}
+```
+
+Query `create_task`:
+```shell
+query {
+  createTasks(
+    	last: 3
+    	orderBy: ID_DESC
+  ) {
+    nodes {
+      nodeId
+     	id
+      blockHeight
+      user
+  	}
+  }
+}
+```
+
+Query `register_agent`:
+```shell
+query {
+  registerAgents(
+    	last: 3
+    	orderBy: ID_DESC
+  ) {
+    nodes {
+      nodeId
+     	id
+      blockHeight
+      user
+  	}
+  }
+}
+```
+
+Query metadata:
+```shell
+query {
+    _metadata {
+		  lastProcessedHeight 
+  	 lastProcessedTimestamp
+      targetHeight
+      chain
+      specName
+      genesisHash
+      indexerHealthy
+      indexerNodeVersion
+      queryNodeVersion
+      rowCountEstimate {
+        table
+        estimate
+      }
+       dynamicDatasources
+	}
+}
+```
+
+
