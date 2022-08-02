@@ -2,45 +2,9 @@ import { UpdateSettings, MoveBalances,
   RegisterAgent, UpdateAgent, UnregisterAgent, WithdrawReward, CheckInAgent, ProxyCall,
   CreateTask, RemoveTask, RefillTaskBalance} from "../types";
 import { CosmosMessage } from "@subql/types-cosmos";
-
-// Messages called by the owner
-type MsgUpdateSettings = {
-  update_settings: {}
-};
-type MsgMoveBalances = {
-  move_balances: {} 
-};
-
-// Messages for tasks
-type MsgCreateTask = {
-  create_task: {}
-};
-type MsgRemoveTask = {
-  remove_task: {}
-};
-type MsgRefillTaskBalance = {
-  refill_task_balance: {}
-};
-
-// Messages for agents
-type MsgRegisterAgent = {
-  register_agent: {}
-};
-type MsgUpdateAgent = {
-  update_agent: {}
-};
-type MsgUnregisterAgent = {
-  unregister_agent: {}
-};
-type MsgWithdrawReward = {
-  withdraw_reward: {}
-};
-type MsgCheckInAgent = {
-  check_in_agent: {}
-};
-type MsgProxyCall = {
-  proxy_call: {}
-};
+import { MsgUpdateSettings, MsgMoveBalances, 
+  MsgRegisterAgent, MsgUpdateAgent, MsgUnregisterAgent, MsgWithdrawReward, MsgCheckInAgent, MsgProxyCall,
+  MsgCreateTask, MsgRemoveTask, MsgRefillTaskBalance } from './msgTypes'
 
 export async function handleUpdateSettings(
   message: CosmosMessage<{ sender: string; msg: MsgUpdateSettings }>
@@ -120,7 +84,7 @@ export async function handleUpdateAgent(
 }
 
 export async function handleUnregisterAgent(
-  message: CosmosMessage<{ sender: string; msg: MsgRegisterAgent }> 
+  message: CosmosMessage<{ sender: string; msg: MsgUnregisterAgent }> 
 ): Promise<void> {
   const RegisterUnregisterAgent = UnregisterAgent.create({
     id: `${message.tx.hash}-${message.idx}`,
@@ -133,7 +97,7 @@ export async function handleUnregisterAgent(
 export async function handleWithdrawReward(
   message: CosmosMessage<{ sender: string; msg: MsgWithdrawReward }> 
 ): Promise<void> {
-  const WithdrawRewardRecord = RegisterAgent.create({
+  const WithdrawRewardRecord = WithdrawReward.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
     user: message.msg.decodedMsg.sender,
