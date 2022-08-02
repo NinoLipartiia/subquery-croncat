@@ -2,69 +2,83 @@
 type UpdateSettings @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  user: String!
+  sender: String!
+  ownerId: String,
+  slotGranularity: BigInt
+  paused: Boolean
+  agentFeeDenom: String
+  agentFeeAmount: BigInt
+  gasPrice: BigInt
+  proxyCallbackGas: BigInt
+  minTasksPerAgent: BigInt
+  agentsEjectThreshold: BigInt
 }
 
 type MoveBalances @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  user: String!
+  sender: String!
+  ##accountId: String!
 }
 
 # Agent methods
 type RegisterAgent @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  user: String! # The address that tries to register as an agent
+  sender: String! # The address that tries to register as an agent
+  payableAccountId: String
 }
 
 type UpdateAgent @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  user: String!
+  sender: String!
+  ##payableAccountId: String!
 }
 
 type UnregisterAgent @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  user: String!
+  sender: String!
 }
 
 type WithdrawReward @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  user: String!
+  sender: String!
 }
 
 type CheckInAgent @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  user: String!
+  sender: String!
 }
 
 type ProxyCall @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  user: String! # The address of the agent
+  sender: String! # The address of the agent
 }
 
 # Methods for tasks
 type CreateTask @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  user: String! # The address that voted
+  sender: String! # The address that voted
   # TODO: more fields
 }
 
 type RemoveTask @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  user: String! # The address of the agent
+  sender: String! # The address of the agent
+  taskHash: String!
 }
 
 type RefillTaskBalance @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  user: String! # The address of the agent
+  sender: String! # The address of the agent
+  taskHash: String!
 }
 

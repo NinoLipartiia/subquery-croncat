@@ -15,15 +15,16 @@ schema:
   file: ./schema.graphql
 
 network:
-  chainId: juno-1
+  chainId: testing
   # You must connect to an archive (non-pruned) node
   endpoint: https://rpc.juno-1.api.onfinality.io
+  # endpoint: http://node:26657/ for local node
   # Using a dictionary can massively improve indexing speed
   dictionary: https://api.subquery.network/sq/subquery/cosmos-juno-dictionary
 
 dataSources:
   - kind: cosmos/Runtime
-    startBlock: 4136532 # first block on juno-1
+    startBlock: 4136532 # first block on juno-1 - 4136532
     #chainTypes: # This is a beta feature that allows support for any Cosmos chain by importing the correct protobuf messages
     #  cosmos.slashing.v1beta1:
     #    file: "./proto/cosmos/slashing/v1beta1/tx.proto"
@@ -37,65 +38,65 @@ dataSources:
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
             contractCall: "update_settings"
-            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+            contract: "juno1vguuxez2h5ekltfj9gjd62fs5k4rl2zy5hfrncasykzw08rezpfs0q4qje"
         - handler: handleMoveBalances
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
             contractCall: "move_balances"
-            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+            contract: "juno1vguuxez2h5ekltfj9gjd62fs5k4rl2zy5hfrncasykzw08rezpfs0q4qje"
         - handler: handleCreateTask # Methods for tasks 
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
             contractCall: "create_task"
-            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+            contract: "juno1vguuxez2h5ekltfj9gjd62fs5k4rl2zy5hfrncasykzw08rezpfs0q4qje"
         - handler: handleRemoveTask
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
             contractCall: "remove_task"
-            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+            contract: "juno1vguuxez2h5ekltfj9gjd62fs5k4rl2zy5hfrncasykzw08rezpfs0q4qje"
         - handler: handleRefillTaskBalance
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
             contractCall: "refill_task"
-            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+            contract: "juno1vguuxez2h5ekltfj9gjd62fs5k4rl2zy5hfrncasykzw08rezpfs0q4qje"
         - handler: handleRegisterAgent # Agent methods
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
             contractCall: "register_agent"
-            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+            contract: "juno1vguuxez2h5ekltfj9gjd62fs5k4rl2zy5hfrncasykzw08rezpfs0q4qje"
         - handler: handleUpdateAgent
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
             contractCall: "update_agent"
-            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+            contract: "juno1vguuxez2h5ekltfj9gjd62fs5k4rl2zy5hfrncasykzw08rezpfs0q4qje"
         - handler: handleUnregisterAgent
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
             contractCall: "unregister_agent"
-            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+            contract: "juno1vguuxez2h5ekltfj9gjd62fs5k4rl2zy5hfrncasykzw08rezpfs0q4qje"
         - handler: handleWithdrawReward
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
             contractCall: "withdraw_agent_balance"
-            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+            contract: "juno1vguuxez2h5ekltfj9gjd62fs5k4rl2zy5hfrncasykzw08rezpfs0q4qje"
         - handler: handleCheckInAgent
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
             contractCall: "accept_nomination_agent"
-            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+            contract: "juno1vguuxez2h5ekltfj9gjd62fs5k4rl2zy5hfrncasykzw08rezpfs0q4qje"
         - handler: handleProxyCall
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
             contractCall: "proxy_call"
-            contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
+            contract: "juno1vguuxez2h5ekltfj9gjd62fs5k4rl2zy5hfrncasykzw08rezpfs0q4qje"
 

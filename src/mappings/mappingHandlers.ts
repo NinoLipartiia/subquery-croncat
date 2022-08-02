@@ -12,7 +12,16 @@ export async function handleUpdateSettings(
   const UpdateSettingsRecord = UpdateSettings.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
-    user: message.msg.decodedMsg.sender,
+    sender: message.msg.decodedMsg.sender,
+    ownerId: message.msg.decodedMsg.msg.updateSettings?.ownerId,
+    slotGranularity: message.msg.decodedMsg.msg.updateSettings?.slotGranularity,
+    paused: message.msg.decodedMsg.msg.updateSettings?.paused,
+    agentFeeDenom: message.msg.decodedMsg.msg.updateSettings?.agentFee.denom,
+    agentFeeAmount: message.msg.decodedMsg.msg.updateSettings?.agentFee.amount,
+    gasPrice: message.msg.decodedMsg.msg.updateSettings?.gasPrice,
+    proxyCallbackGas: message.msg.decodedMsg.msg.updateSettings?.proxyCallbackGas,
+    minTasksPerAgent: message.msg.decodedMsg.msg.updateSettings?.minTasksPerAgent,
+    agentsEjectThreshold: message.msg.decodedMsg.msg.updateSettings?.agentsEjectThreshold,
   });
   await UpdateSettingsRecord.save();
 }
@@ -23,7 +32,8 @@ export async function handleMoveBalances(
   const MoveBalancesRecord = MoveBalances.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
-    user: message.msg.decodedMsg.sender,
+    sender: message.msg.decodedMsg.sender,
+    //accountId:  message.msg.decodedMsg.msg.moveBalances.accountId,
   });
   await MoveBalancesRecord.save();
 }
@@ -34,7 +44,7 @@ export async function handleCreateTask(
   const CreateTaskRecord = CreateTask.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
-    user: message.msg.decodedMsg.sender,
+    sender: message.msg.decodedMsg.sender,
   });
   await CreateTaskRecord.save();
 }
@@ -45,7 +55,8 @@ export async function handleRemoveTask(
   const RemoveTaskRecord = RemoveTask.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
-    user: message.msg.decodedMsg.sender,
+    sender: message.msg.decodedMsg.sender,
+    taskHash: message.msg.decodedMsg.msg.removeTask.taskHash,
   });
   await RemoveTaskRecord.save();
 }
@@ -56,7 +67,8 @@ export async function handleRefillTaskBalance(
   const CreateRefillTaskBalance = RefillTaskBalance.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
-    user: message.msg.decodedMsg.sender,
+    sender: message.msg.decodedMsg.sender,
+    taskHash: message.msg.decodedMsg.msg.refillTaskBalance.taskHash,
   });
   await CreateRefillTaskBalance.save();
 }
@@ -67,7 +79,8 @@ export async function handleRegisterAgent(
   const RegisterAgentRecord = RegisterAgent.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
-    user: message.msg.decodedMsg.sender,
+    sender: message.msg.decodedMsg.sender,
+    payableAccountId: message.msg.decodedMsg.msg.registerAgent?.payableAccountId,
   });
   await RegisterAgentRecord.save();
 }
@@ -78,7 +91,8 @@ export async function handleUpdateAgent(
   const UpdateAgentRecord = UpdateAgent.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
-    user: message.msg.decodedMsg.sender,
+    sender: message.msg.decodedMsg.sender,
+    //payableAccountId: message.msg.decodedMsg.msg.updateAgent.payableAccountId,
   });
   await UpdateAgentRecord.save();
 }
@@ -89,7 +103,7 @@ export async function handleUnregisterAgent(
   const RegisterUnregisterAgent = UnregisterAgent.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
-    user: message.msg.decodedMsg.sender,
+    sender: message.msg.decodedMsg.sender,
   });
   await RegisterUnregisterAgent.save();
 }
@@ -100,7 +114,7 @@ export async function handleWithdrawReward(
   const WithdrawRewardRecord = WithdrawReward.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
-    user: message.msg.decodedMsg.sender,
+    sender: message.msg.decodedMsg.sender,
   });
   await WithdrawRewardRecord.save();
 }
@@ -111,7 +125,7 @@ export async function handleCheckInAgent(
   const CheckInAgentRecord = CheckInAgent.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
-    user: message.msg.decodedMsg.sender,
+    sender: message.msg.decodedMsg.sender,
   });
   await CheckInAgentRecord.save();
 }
@@ -122,7 +136,7 @@ export async function handleProxyCall(
   const ProxyCallRecord = ProxyCall.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
-    user: message.msg.decodedMsg.sender,
+    sender: message.msg.decodedMsg.sender,
   });
   await ProxyCallRecord.save();
 }

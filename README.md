@@ -1,37 +1,37 @@
 # Getting Started
 
-### 1. Install dependencies
+## 1. Install dependencies
 
 ```shell
 yarn
 ```
 
-### 2. Generate types
+## 2. Generate types
 
 ```shell
 yarn codegen
 ```
 
-### 3. Build
+## 3. Build
 
 ```shell
 yarn build
 ```
 
-### 4. Run locally
+## 4. Might need to remove data from db
+```shell
+rm -r .data/postgres
+```
+
+## 5. Run locally
 
 ```shell
 yarn start:docker
 ```
 
-```shell
-yarn
-yarn codegen
-yarn build
-yarn start:docker
-```
+# Query
 
-### 4. Query
+Below there are some exapmles of query. See the full list in docs.
 
 Query `proxy_call`:
 ```shell
@@ -59,7 +59,7 @@ query {
       nodeId
      	id
       blockHeight
-      user
+      sender
   	}
   }
 }
@@ -76,7 +76,7 @@ query {
       nodeId
      	id
       blockHeight
-      user
+      sender
   	}
   }
 }
