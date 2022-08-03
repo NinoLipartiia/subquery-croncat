@@ -33,75 +33,98 @@ yarn start:docker
 
 Below there are some exapmles of query. See the full list in docs.
 
-Query `proxy_call`:
-```shell
 query {
-  proxyCalls(
-    	last: 3
-    	orderBy: ID_DESC
-  ) {
-    nodes {
-      nodeId
-     	id
-  	}
+ _metadata {
+    lastProcessedHeight
+    lastProcessedTimestamp
+    targetHeight
+    chain
+    indexerHealthy
   }
-}
-```
 
-Query `create_task`:
-```shell
-query {
-  createTasks(
-    	last: 3
-    	orderBy: ID_DESC
-  ) {
+  createTasks {
     nodes {
-      nodeId
-     	id
       blockHeight
       sender
-  	}
+      interval
+      boundary
+      stopOnFail
+      actions
+      rules
+    }
+    totalCount
   }
-}
-```
 
-Query `register_agent`:
-```shell
-query {
-  registerAgents(
-    	last: 3
-    	orderBy: ID_DESC
-  ) {
+  registerAgents {
     nodes {
-      nodeId
-     	id
+      blockHeight
+      payableAccountId
+      sender
+    }
+    totalCount
+  }
+
+  checkInAgents {
+    nodes {
       blockHeight
       sender
-  	}
+    }
+    totalCount
+  }
+
+  updateAgents {
+    nodes {
+      blockHeight
+      payableAccountId
+    }
+  }
+
+  proxyCalls {
+    nodes {
+      blockHeight
+    }
+  }
+  withdrawRewards {
+    nodes {
+      blockHeight
+    }
+  }
+
+  registerAgents {
+    nodes {
+      blockHeight
+    }
+  }
+
+  moveBalances {
+    nodes {
+      blockHeight
+    }
+  }
+
+  updateSettings {
+    nodes {
+      blockHeight
+      agentFeeDenom
+      agentFeeAmount
+    }
+  }
+
+  refillTaskBalances {
+    nodes {
+      blockHeight
+      taskHash
+    }
+  }
+
+  removeTasks {
+    nodes {
+      blockHeight
+      taskHash
+    }
   }
 }
-```
 
-Query metadata:
-```shell
-query {
-    _metadata {
-		  lastProcessedHeight 
-  	 lastProcessedTimestamp
-      targetHeight
-      chain
-      specName
-      genesisHash
-      indexerHealthy
-      indexerNodeVersion
-      queryNodeVersion
-      rowCountEstimate {
-        table
-        estimate
-      }
-       dynamicDatasources
-	}
-}
 ```
 
 

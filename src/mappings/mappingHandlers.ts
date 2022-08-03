@@ -2,26 +2,27 @@ import { UpdateSettings, MoveBalances,
   RegisterAgent, UpdateAgent, UnregisterAgent, WithdrawReward, CheckInAgent, ProxyCall,
   CreateTask, RemoveTask, RefillTaskBalance} from "../types";
 import { CosmosMessage } from "@subql/types-cosmos";
-import { MsgUpdateSettings, MsgMoveBalances, 
-  MsgRegisterAgent, MsgUpdateAgent, MsgUnregisterAgent, MsgWithdrawReward, MsgCheckInAgent, MsgProxyCall,
-  MsgCreateTask, MsgRemoveTask, MsgRefillTaskBalance } from './msgTypes'
+import { MsgUpdateSettings, MsgMoveBalances, MsgRegisterAgent, MsgUpdateAgent,
+  MsgCreateTask, MsgRemoveTask, MsgRefillTaskBalance, Coin } from './msgTypes'
+// import { writeFileSync } from 'fs';
 
 export async function handleUpdateSettings(
   message: CosmosMessage<{ sender: string; msg: MsgUpdateSettings }>
 ): Promise<void> {
+  //throw JSON.stringify(message);
   const UpdateSettingsRecord = UpdateSettings.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
     sender: message.msg.decodedMsg.sender,
-    ownerId: message.msg.decodedMsg.msg.updateSettings?.ownerId,
-    slotGranularity: message.msg.decodedMsg.msg.updateSettings?.slotGranularity,
-    paused: message.msg.decodedMsg.msg.updateSettings?.paused,
-    agentFeeDenom: message.msg.decodedMsg.msg.updateSettings?.agentFee.denom,
-    agentFeeAmount: message.msg.decodedMsg.msg.updateSettings?.agentFee.amount,
-    gasPrice: message.msg.decodedMsg.msg.updateSettings?.gasPrice,
-    proxyCallbackGas: message.msg.decodedMsg.msg.updateSettings?.proxyCallbackGas,
-    minTasksPerAgent: message.msg.decodedMsg.msg.updateSettings?.minTasksPerAgent,
-    agentsEjectThreshold: message.msg.decodedMsg.msg.updateSettings?.agentsEjectThreshold,
+    ownerId: message.msg.decodedMsg.msg.update_settings?.owner_id,
+    slotGranularity: message.msg.decodedMsg.msg.update_settings?.slot_granularity,
+    paused: message.msg.decodedMsg.msg.update_settings?.paused,
+    agentFeeDenom: message.msg.decodedMsg.msg.update_settings?.agent_fee.denom,
+    agentFeeAmount: message.msg.decodedMsg.msg.update_settings?.agent_fee.amount,
+    gasPrice: message.msg.decodedMsg.msg.update_settings?.gas_price,
+    proxyCallbackGas: message.msg.decodedMsg.msg.update_settings?.proxy_callback_gas,
+    minTasksPerAgent: message.msg.decodedMsg.msg.update_settings?.min_tasks_per_agent,
+    agentsEjectThreshold: message.msg.decodedMsg.msg.update_settings?.agents_eject_threshold,
   });
   await UpdateSettingsRecord.save();
 }
@@ -29,22 +30,30 @@ export async function handleUpdateSettings(
 export async function handleMoveBalances(
   message: CosmosMessage<{ sender: string; msg: MsgMoveBalances }>
 ): Promise<void> {
+  //throw JSON.stringify(message);
   const MoveBalancesRecord = MoveBalances.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
     sender: message.msg.decodedMsg.sender,
-    //accountId:  message.msg.decodedMsg.msg.moveBalances.accountId,
+    accountId: message.msg.decodedMsg.msg.move_balances.account_id,
+    balances: JSON.stringify(message.msg.decodedMsg.msg.move_balances.balances)
   });
   await MoveBalancesRecord.save();
 }
 
 export async function handleCreateTask(
-  message: CosmosMessage<{ sender: string; msg: MsgCreateTask }>
+  message: CosmosMessage<{ sender: string; msg: MsgCreateTask; }>
 ): Promise<void> {
+  //throw JSON.stringify(message);
   const CreateTaskRecord = CreateTask.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
     sender: message.msg.decodedMsg.sender,
+    interval: JSON.stringify(message.msg.decodedMsg.msg.create_task.task.interval),
+    boundary: JSON.stringify(message.msg.decodedMsg.msg.create_task.task.boundary),
+    stopOnFail: message.msg.decodedMsg.msg.create_task.task.stop_on_fail,
+    actions: JSON.stringify(message.msg.decodedMsg.msg.create_task.task.actions),
+    rules: JSON.stringify(message.msg.decodedMsg.msg.create_task.task.rules),
   });
   await CreateTaskRecord.save();
 }
@@ -56,19 +65,19 @@ export async function handleRemoveTask(
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
     sender: message.msg.decodedMsg.sender,
-    taskHash: message.msg.decodedMsg.msg.removeTask.taskHash,
+    taskHash: message.msg.decodedMsg.msg.remove_task.task_hash,
   });
   await RemoveTaskRecord.save();
 }
 
 export async function handleRefillTaskBalance(
-  message: CosmosMessage<{ sender: string; msg: MsgRefillTaskBalance }>
+  message: CosmosMessage<{ sender: string; msg: MsgRefillTaskBalance; }>
 ): Promise<void> {
   const CreateRefillTaskBalance = RefillTaskBalance.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
     sender: message.msg.decodedMsg.sender,
-    taskHash: message.msg.decodedMsg.msg.refillTaskBalance.taskHash,
+    taskHash: message.msg.decodedMsg.msg.refill_task_balance.task_hash,
   });
   await CreateRefillTaskBalance.save();
 }
@@ -76,11 +85,15 @@ export async function handleRefillTaskBalance(
 export async function handleRegisterAgent(
   message: CosmosMessage<{ sender: string; msg: MsgRegisterAgent }> 
 ): Promise<void> {
+  // console.log('PROCESSING RegisterAgent');
+  // console.log(message);
+  // writeFileSync('/tmp/register_agent.txt', JSON.stringify(message));
+  // throw JSON.stringify(message);
   const RegisterAgentRecord = RegisterAgent.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
     sender: message.msg.decodedMsg.sender,
-    payableAccountId: message.msg.decodedMsg.msg.registerAgent?.payableAccountId,
+    payableAccountId: message.msg.decodedMsg.msg.register_agent?.payable_account_id,
   });
   await RegisterAgentRecord.save();
 }
@@ -92,13 +105,13 @@ export async function handleUpdateAgent(
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
     sender: message.msg.decodedMsg.sender,
-    //payableAccountId: message.msg.decodedMsg.msg.updateAgent.payableAccountId,
+    payableAccountId: message.msg.decodedMsg.msg.update_agent?.payable_account_id,
   });
   await UpdateAgentRecord.save();
 }
 
 export async function handleUnregisterAgent(
-  message: CosmosMessage<{ sender: string; msg: MsgUnregisterAgent }> 
+  message: CosmosMessage<{ sender: string }> 
 ): Promise<void> {
   const RegisterUnregisterAgent = UnregisterAgent.create({
     id: `${message.tx.hash}-${message.idx}`,
@@ -109,7 +122,7 @@ export async function handleUnregisterAgent(
 }
 
 export async function handleWithdrawReward(
-  message: CosmosMessage<{ sender: string; msg: MsgWithdrawReward }> 
+  message: CosmosMessage<{ sender: string }> 
 ): Promise<void> {
   const WithdrawRewardRecord = WithdrawReward.create({
     id: `${message.tx.hash}-${message.idx}`,
@@ -120,7 +133,7 @@ export async function handleWithdrawReward(
 }
 
 export async function handleCheckInAgent(
-  message: CosmosMessage<{ sender: string; msg: MsgCheckInAgent }> 
+  message: CosmosMessage<{ sender: string }> 
 ): Promise<void> {
   const CheckInAgentRecord = CheckInAgent.create({
     id: `${message.tx.hash}-${message.idx}`,
@@ -131,7 +144,7 @@ export async function handleCheckInAgent(
 }
 
 export async function handleProxyCall(
-  message: CosmosMessage<{ sender: string; msg: MsgProxyCall }> 
+  message: CosmosMessage<{ sender: string }> 
 ): Promise<void> {
   const ProxyCallRecord = ProxyCall.create({
     id: `${message.tx.hash}-${message.idx}`,

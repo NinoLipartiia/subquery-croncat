@@ -7,7 +7,7 @@ type UpdateSettings @entity {
   slotGranularity: BigInt
   paused: Boolean
   agentFeeDenom: String
-  agentFeeAmount: BigInt
+  agentFeeAmount: String
   gasPrice: BigInt
   proxyCallbackGas: BigInt
   minTasksPerAgent: BigInt
@@ -18,7 +18,8 @@ type MoveBalances @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
   sender: String!
-  ##accountId: String!
+  accountId: String!
+  balances: String!
 }
 
 # Agent methods
@@ -33,7 +34,7 @@ type UpdateAgent @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
   sender: String!
-  ##payableAccountId: String!
+  payableAccountId: String!
 }
 
 type UnregisterAgent @entity {
@@ -64,8 +65,13 @@ type ProxyCall @entity {
 type CreateTask @entity {
   id: ID! # The block hash
   blockHeight: BigInt!
-  sender: String! # The address that voted
+  sender: String!
   # TODO: more fields
+  interval: String!
+  boundary: String!
+  stopOnFail: Boolean!
+  actions: String!
+  rules: String!
 }
 
 type RemoveTask @entity {

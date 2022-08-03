@@ -1,66 +1,82 @@
 // Messages called by the owner
 export type MsgUpdateSettings = {
-    updateSettings: {
-      ownerId?: string,
-      slotGranularity?: bigint,
+    update_settings: {
+      owner_id?: string,
+      slot_granularity?: bigint,
       paused?: boolean,
-      agentFee?: Coin,
-      gasPrice?: bigint,
-      proxyCallbackGas?: bigint,
-      minTasksPerAgent?: bigint,
-      agentsEjectThreshold?: bigint,
-      //treasuryId?: string
+      agent_fee?: Coin,
+      gas_price?: bigint,
+      proxy_callback_gas?: bigint,
+      min_tasks_per_agent?: bigint,
+      agents_eject_threshold?: bigint,
     }
 };
 export type MsgMoveBalances = {
-    moveBalances: {
-      //balances: Balance[],
-      accountId: string,
+    move_balances: {
+      balances: any[],
+      account_id: string,
     } 
 };
   
-  // Messages for tasks
-export  type MsgCreateTask = { //??
-    createTask: {}
+// Messages for tasks
+export type MsgCreateTask = {
+    create_task: {
+      task: TaskRequest
+    }
 };
 export type MsgRemoveTask = {
-    removeTask: {
-      taskHash: string
+    remove_task: {
+      task_hash: string
     }
 };
 export type MsgRefillTaskBalance = {
-    refillTaskBalance: {
-      taskHash: string
+    refill_task_balance: {
+      task_hash: string
     }
 };
   
 // Messages for agents
 export type MsgRegisterAgent = {
-    registerAgent: {
-      payableAccountId?: string
+    register_agent: {
+      payable_account_id?: string
     }
 };
 
 export type MsgUpdateAgent = {
-    updateAgent: {
-      payableAccountId: string
+    update_agent: {
+      payable_account_id: string
     }
 };
-export type MsgUnregisterAgent = {
-    unregisterAgent: {}
-  };
-
-export type MsgWithdrawReward = {
-    withdrawReward: {}
-};
-export type MsgCheckInAgent = {
-    checkInAgent: {}
-};
-export type MsgProxyCall = {
-    proxyCall: {}
-};
  
-interface Coin {
+export type Coin = {
     denom: string,
-    amount: bigint
+    amount: string
+}
+
+type TaskRequest = {
+  interval: any,
+  boundary: any,
+  stop_on_fail: boolean,
+  actions: any[],
+  rules?: Rule[],
+}
+
+// interface Once {}
+// interface Immediate {}
+// interface Block {
+//     block: bigint
+// }
+// interface Cron {
+//     cron: string
+// }
+// type Interval = Once | Immediate | Block | Cron
+
+// type Action = {
+//     msg: CosmosMsg,
+//     gas_limit?: bigint,
+// }
+
+type Rule = {
+  contract_addr: string,
+  msg: bigint[],
 }
