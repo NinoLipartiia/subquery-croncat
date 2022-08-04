@@ -33,6 +33,7 @@ yarn start:docker
 
 Below there are some exapmles of query. See the full list in docs.
 
+```shell
 query {
  _metadata {
     lastProcessedHeight
@@ -124,7 +125,6 @@ query {
     }
   }
 }
-
 ```
 
 
