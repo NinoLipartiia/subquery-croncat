@@ -4,12 +4,10 @@ import { UpdateSettings, MoveBalances,
 import { CosmosMessage } from "@subql/types-cosmos";
 import { MsgUpdateSettings, MsgMoveBalances, MsgRegisterAgent, MsgUpdateAgent,
   MsgCreateTask, MsgRemoveTask, MsgRefillTaskBalance, Coin } from './msgTypes'
-// import { writeFileSync } from 'fs';
 
 export async function handleUpdateSettings(
   message: CosmosMessage<{ sender: string; msg: MsgUpdateSettings }>
 ): Promise<void> {
-  //throw JSON.stringify(message);
   const UpdateSettingsRecord = UpdateSettings.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
@@ -30,7 +28,6 @@ export async function handleUpdateSettings(
 export async function handleMoveBalances(
   message: CosmosMessage<{ sender: string; msg: MsgMoveBalances }>
 ): Promise<void> {
-  //throw JSON.stringify(message);
   const MoveBalancesRecord = MoveBalances.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
@@ -44,7 +41,6 @@ export async function handleMoveBalances(
 export async function handleCreateTask(
   message: CosmosMessage<{ sender: string; msg: MsgCreateTask; }>
 ): Promise<void> {
-  //throw JSON.stringify(message);
   const CreateTaskRecord = CreateTask.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),
@@ -85,10 +81,6 @@ export async function handleRefillTaskBalance(
 export async function handleRegisterAgent(
   message: CosmosMessage<{ sender: string; msg: MsgRegisterAgent }> 
 ): Promise<void> {
-  // console.log('PROCESSING RegisterAgent');
-  // console.log(message);
-  // writeFileSync('/tmp/register_agent.txt', JSON.stringify(message));
-  // throw JSON.stringify(message);
   const RegisterAgentRecord = RegisterAgent.create({
     id: `${message.tx.hash}-${message.idx}`,
     blockHeight: BigInt(message.block.block.header.height),

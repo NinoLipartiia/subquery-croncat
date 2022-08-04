@@ -61,21 +61,6 @@ type TaskRequest = {
   rules?: Rule[],
 }
 
-// interface Once {}
-// interface Immediate {}
-// interface Block {
-//     block: bigint
-// }
-// interface Cron {
-//     cron: string
-// }
-// type Interval = Once | Immediate | Block | Cron
-
-// type Action = {
-//     msg: CosmosMsg,
-//     gas_limit?: bigint,
-// }
-
 type Rule = {
   contract_addr: string,
   msg: bigint[],

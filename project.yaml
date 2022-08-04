@@ -61,7 +61,7 @@ dataSources:
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
-            contractCall: "refill_task"
+            contractCall: "refill_task_balance"
             contract: "juno13tk76epuctgtg4g9y3s0lyjvjq26x59dnqrjw86c975a44mcpm6qnlnkvm"
         - handler: handleRegisterAgent # Agent methods
           kind: cosmos/MessageHandler
