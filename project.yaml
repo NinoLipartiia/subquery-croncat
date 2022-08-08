@@ -15,16 +15,16 @@ schema:
   file: ./schema.graphql
 
 network:
-  #chainId: juno-1
-  #endpoint: https://rpc.juno-1.api.onfinality.io
-  chainId: testing #for local node
-  endpoint: http://node:26657/
+  chainId: juno-1
+  endpoint: https://rpc.juno-1.api.onfinality.io
+  #chainId: testing #for local node
+  #endpoint: http://node:26657/
   # Using a dictionary can massively improve indexing speed
   dictionary: https://api.subquery.network/sq/subquery/cosmos-juno-dictionary
 
 dataSources:
   - kind: cosmos/Runtime
-    startBlock: 4000 # first block on juno-1 - 4136532 # 4175250
+    startBlock: 4175250 # first block on juno-1 - 4136532 # 4175250
     #chainTypes: # This is a beta feature that allows support for any Cosmos chain by importing the correct protobuf messages
     #  cosmos.slashing.v1beta1:
     #    file: "./proto/cosmos/slashing/v1beta1/tx.proto"

@@ -6,8 +6,7 @@ type UpdateSettings @entity {
   ownerId: String,
   slotGranularity: BigInt
   paused: Boolean
-  agentFeeDenom: String
-  agentFeeAmount: String
+  agentFee: String
   gasPrice: BigInt
   proxyCallbackGas: BigInt
   minTasksPerAgent: BigInt
