@@ -1,5 +1,10 @@
 # Getting Started
 
+For quick start you may use 
+```shell
+yarn all
+```
+
 ## 1. Install dependencies
 
 ```shell

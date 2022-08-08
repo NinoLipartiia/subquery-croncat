@@ -4,7 +4,7 @@ export type MsgUpdateSettings = {
       owner_id?: string,
       slot_granularity?: bigint,
       paused?: boolean,
-      agent_fee?: Coin,
+      agent_fee?: any,
       gas_price?: bigint,
       proxy_callback_gas?: bigint,
       min_tasks_per_agent?: bigint,
